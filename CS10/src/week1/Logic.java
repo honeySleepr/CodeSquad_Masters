@@ -1,5 +1,8 @@
 package week1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Logic {
 
     boolean sum(boolean a, boolean b) {
@@ -37,6 +40,35 @@ public class Logic {
         }
         answer[answer.length - 1] = bitC;
 
+        return answer;
+    }
+
+    boolean[] dec2bin(int decimal) {
+        List<Integer> list = new ArrayList<>();
+
+        while (decimal > 0) {
+            list.add(decimal - (decimal / 2) * 2);   // decimal % 2 와 같다
+            decimal /= 2;
+        }
+        boolean[] answer = new boolean[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) == 1) {
+                answer[i] = true;
+            } else {
+                answer[i] = false;
+            }
+        }
+        return answer;
+    }
+
+
+    int bin2dec(String binary) {
+        int answer = 0;
+        int powerOf2 = 1;
+        for (int i = 0; i < binary.length(); i++) {
+            answer += (binary.charAt(i)-'0') * powerOf2;
+            powerOf2 *= 2;
+        }
         return answer;
     }
 

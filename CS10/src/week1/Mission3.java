@@ -12,8 +12,12 @@ public class Mission3 {
         /* binary 로 출력하려면 toBinary = true 로 변경*/
         boolean toBinary = false;
 
-        boolean[] byteA = convertInput();
-        boolean[] byteB = convertInput();
+        Scanner sc = new Scanner(System.in);
+        String[] input1 = sc.nextLine().split("");
+        String[] input2 = sc.nextLine().split("");
+
+        boolean[] byteA = convertInput(input1);
+        boolean[] byteB = convertInput(input2);
 
         Logic logic = new Logic();
         boolean[] answer = logic.byteAdder(byteA, byteB);
@@ -22,9 +26,8 @@ public class Mission3 {
 
     }
 
-    private static boolean[] convertInput() {
-        Scanner sc = new Scanner(System.in);
-        String[] input = sc.nextLine().split("");
+    private static boolean[] convertInput(String[] input) {
+
         boolean[] bytes = new boolean[input.length];
 
         for (int i = 0; i < bytes.length; i++) {
