@@ -3,13 +3,13 @@ package cs01;
 import java.util.Arrays;
 
 public class Mission {
-    Logic logic;
+    Adder adder;
     Printer printer;
     Convertor convertor;
     boolean toBinary = true;
 
-    Mission(Logic logic, Printer printer, Convertor convertor) {
-        this.logic = logic;
+    Mission(Adder adder, Printer printer, Convertor convertor) {
+        this.adder = adder;
         this.printer = printer;
         this.convertor = convertor;
 
@@ -27,8 +27,8 @@ public class Mission {
         bitB = bits[1];
         carry = bits[2];
 
-        boolean[] half = logic.halfAdder(bitA, bitB);
-        boolean[] full = logic.fullAdder(bitA, bitB, carry);
+        boolean[] half = adder.halfAdder(bitA, bitB);
+        boolean[] full = adder.fullAdder(bitA, bitB, carry);
 
         System.out.println("------Mission 2------");
         if (toBinary) {
@@ -52,7 +52,7 @@ public class Mission {
         boolean[] booleanByteA = convertor.convertInput(byteA);
         boolean[] booleanByteB = convertor.convertInput(byteB);
 
-        boolean[] answer = logic.byteAdder(booleanByteA, booleanByteB);
+        boolean[] answer = adder.byteAdder(booleanByteA, booleanByteB);
 
         System.out.println("\n------Mission 3------");
         if (toBinary) {
@@ -61,14 +61,13 @@ public class Mission {
         }else{
             System.out.println(Arrays.toString(answer));
         }
-
     }
 
     private void runMission4() {
 
-        boolean[] binary = logic.dec2bin(173);
+        boolean[] binary = convertor.dec2bin(173);
         String[] binaryAnswer = convertor.getBinaryResult(binary);
-        int decimal = logic.bin2dec("0101");
+        int decimal = convertor.bin2dec("0101");
 
         System.out.println("\n------Mission 4------");
         System.out.println("dec2bin : " + Arrays.toString(binaryAnswer).replace("[","").replace("]","").replace(", ",""));
