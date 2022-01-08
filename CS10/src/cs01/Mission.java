@@ -1,12 +1,13 @@
 package cs01;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Mission {
     Adder adder;
     Printer printer;
     Convertor convertor;
-    boolean toBinary = true;
+    boolean toBinary = false;
 
     Mission(Adder adder, Printer printer, Convertor convertor) {
         this.adder = adder;
@@ -57,7 +58,7 @@ public class Mission {
         System.out.println("\n------Mission 3------");
         if (toBinary) {
             String[] binaryAnswer = convertor.getBinaryResult(answer);
-            System.out.println(Arrays.toString(binaryAnswer).replace("[","").replace("]","").replace(", ",""));
+            Arrays.stream(binaryAnswer).forEach(System.out::print);
         }else{
             System.out.println(Arrays.toString(answer));
         }
