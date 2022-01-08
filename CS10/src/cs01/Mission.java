@@ -1,13 +1,10 @@
 package cs01;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
-
 public class Mission {
     Adder adder;
     Printer printer;
     Convertor convertor;
-    boolean toBinary = false;
+    static boolean toBinary = true;
 
     Mission(Adder adder, Printer printer, Convertor convertor) {
         this.adder = adder;
@@ -31,20 +28,12 @@ public class Mission {
         boolean[] half = adder.halfAdder(bitA, bitB);
         boolean[] full = adder.fullAdder(bitA, bitB, carry);
 
-        System.out.println("------Mission 2------");
-        if (toBinary) {
-            String[] halfBinary = convertor.getBinaryResult(half);
-            String[] fullBinary = convertor.getBinaryResult(full);
-            printer.printMission2Binary(input,halfBinary,fullBinary);
-        } else{
-            printer.printMission2Boolean(bits, half, full);
-        }
-
+        printer.printMission2(bits, half, full);
     }
 
     private void runMission3() {
 
-        String input1 = "111";
+        String input1 = "0001110";
         String input2 = "01001";
 
         String[] byteA = input1.split("");
@@ -55,13 +44,8 @@ public class Mission {
 
         boolean[] answer = adder.byteAdder(booleanByteA, booleanByteB);
 
-        System.out.println("\n------Mission 3------");
-        if (toBinary) {
-            String[] binaryAnswer = convertor.getBinaryResult(answer);
-            Arrays.stream(binaryAnswer).forEach(System.out::print);
-        }else{
-            System.out.println(Arrays.toString(answer));
-        }
+        printer.printMission3(answer, booleanByteA, booleanByteB);
+
     }
 
     private void runMission4() {
@@ -70,8 +54,6 @@ public class Mission {
         String[] binaryAnswer = convertor.getBinaryResult(binary);
         int decimal = convertor.bin2dec("0101");
 
-        System.out.println("\n------Mission 4------");
-        System.out.println("dec2bin : " + Arrays.toString(binaryAnswer).replace("[","").replace("]","").replace(", ",""));
-        System.out.println("bin2dec : " + decimal);
+        printer.printMission4(binaryAnswer, decimal);
     }
 }
