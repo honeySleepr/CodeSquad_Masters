@@ -3,10 +3,10 @@ package cs03;
 import java.util.Random;
 
 public class Mission1 {
-    private final MyList1 videoList;
-    private final MyList1 idList;
+    private final MyList videoList;
+    private final MyList idList;
 
-    Mission1(MyList1 videoList, MyList1 idList) {
+    Mission1(MyList videoList, MyList idList) {
         this.videoList = videoList;
         this.idList = idList;
         addVideo();
@@ -17,10 +17,11 @@ public class Mission1 {
         for (int i = 0; i < 13; i++) {
 
             String title = "제목" + (i + 1);
-            int length = new Random().nextInt(14) + 1;
+            int length = new Random().nextInt(15) + 1;
             String id = createID();
 
-            videoList.add(new Video(title, length, id));
+            Node node = new Node(new Video(title, length, id));
+            videoList.addLast(node);
         }
 
     }
@@ -38,20 +39,20 @@ public class Mission1 {
         }
         idList.temp = idList.head;
         while (idList.temp != null) {
-            if (idList.temp.id.equals(sb.toString())) {
+            if (idList.temp.idNode.equals(sb.toString())) {
                 sb.setLength(0);
                 for (int i = 0; i < 4; i++) {
                     sb.append(Character.toString(random.nextInt(6) + 97));
                 }
                 idList.temp = idList.head;
-            } else if (idList.temp.link != null) {
-                idList.temp = idList.temp.link;
+            } else if (idList.temp.linkNode != null) {
+                idList.temp = idList.temp.linkNode;
             } else {
                 break;
             }
         }
-        idList.add(sb.toString());
+        Node node = new Node(sb.toString());
+        idList.addLast(node);
         return sb.toString();
-
     }
 }

@@ -18,4 +18,12 @@ public class Video {
     public String toString() {
         return title + "(" + id + "):" + length;
     }
+
+    String getId() {
+        return id;
+    }
+
+    int getLength() {
+        return length;
+    }
 }

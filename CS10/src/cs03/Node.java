@@ -1,17 +1,17 @@
 package cs03;
 
 public class Node {
-    String id;
-    Video video;
-    Node link;
+    String idNode;
+    Video videoNode;
+    Node linkNode;
 
-    Node(Video clip) {
-        this.video = clip;
-        this.link = null;
+    Node(Video video) {
+        this.videoNode = video;
+        this.linkNode = null;
     }
 
-    Node(String id) {
-        this.id = id;
-        this.link = null;
+    Node(String idNode) {
+        this.idNode = idNode;
+        this.linkNode = null;
     }
 }
