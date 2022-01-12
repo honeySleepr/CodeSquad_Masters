@@ -3,33 +3,56 @@ package cs03;
 public class MyList {
     Node head;
     Node temp;
-    Node last;
 
     MyList() {
         head = null;
         temp = null;
-        last = null;
     }
 
     void addLast(Node node) {
-        temp = last;
+        temp = head;
         if (head == null) {
             head = node;
+        } else {
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = node;
         }
-        if (temp != null) {
-            temp.linkNode = node;
-        }
-        temp = node;
-        last = node;
     }
 
-    void insert(Node node, int index) { /* < 진행 중 */
+    void insert(Node node, int index) {
         temp = head;
-        if(index == 0){
-
+        // 인덱스 0 입력하거나, List가 비어있을 경우
+        if (index == 0 || temp == null) {
+            node.next = temp;
+            head = node;
+        } else {
+            for (int i = 1; i < index; i++) {
+                if (temp.next == null) {
+                    break;
+                }
+                temp = temp.next;
+            }
+            node.next = temp.next;
+            temp.next = node;
         }
-        for (int i = 1; i < index-1; i++) {
-            temp = temp.linkNode;
+    }
+
+    void delete(Node node) {
+        temp = head;
+        //delete 할 항목이 head에 있을 때
+        if (temp.videoNode == node.videoNode) {
+            head = temp.next;
+        } else {
+            while (temp.next != null) {
+                if (temp.next.videoNode == node.videoNode) {
+                    temp.next = temp.next.next;
+                    break;
+                } else {
+                    temp = temp.next;
+                }
+            }
         }
     }
 
@@ -38,7 +61,7 @@ public class MyList {
         temp = head;
         while (temp != null) {
             System.out.println(temp.videoNode.toString());
-            temp = temp.linkNode;
+            temp = temp.next;
         }
     }
 
@@ -48,7 +71,7 @@ public class MyList {
         int i = 0;
         while (temp != null) {
             videoArray[i] = temp.videoNode;
-            temp = temp.linkNode;
+            temp = temp.next;
             i++;
         }
         return videoArray;
@@ -58,9 +81,10 @@ public class MyList {
         temp = head;
         System.out.print("|---");
         while (temp != null) {
-            System.out.printf("[%s, %d" + "sec]", temp.videoNode.getId(), temp.videoNode.getLength());
+            System.out.printf("[%s, %d" + "sec]", temp.videoNode.getId(),
+                temp.videoNode.getLength());
             System.out.print("---");
-            temp = temp.linkNode;
+            temp = temp.next;
         }
         System.out.println("[end]");
     }
@@ -72,7 +96,7 @@ public class MyList {
         while (temp != null) {
             count++;
             length += temp.videoNode.getLength();
-            temp = temp.linkNode;
+            temp = temp.next;
         }
         System.out.println("영상클립 :" + count + "개");
         System.out.println("전체길이 :" + length + "sec");

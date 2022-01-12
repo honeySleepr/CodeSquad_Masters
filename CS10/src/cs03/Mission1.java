@@ -45,8 +45,8 @@ public class Mission1 {
                     sb.append(Character.toString(random.nextInt(6) + 97));
                 }
                 idList.temp = idList.head;
-            } else if (idList.temp.linkNode != null) {
-                idList.temp = idList.temp.linkNode;
+            } else if (idList.temp.next != null) {
+                idList.temp = idList.temp.next;
             } else {
                 break;
             }
