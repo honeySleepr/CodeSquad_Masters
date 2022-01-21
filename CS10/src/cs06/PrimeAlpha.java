@@ -1,25 +1,19 @@
 package cs06;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Random;
+import java.util.function.Predicate;
 
 public class PrimeAlpha extends Alpha {
 
-    public PrimeAlpha(int number) {
-        this.number = number;
+    private Predicate<Integer> isPrime = (number) -> factors2.apply(number).size() == 2;
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 4; i++) {
+            int random = new Random().nextInt(100) + 1;
+
+            PrimeAlpha prime = new PrimeAlpha();
+
+            System.out.println(random + "  :  " + prime.isPrime.test(random));
+        }
     }
-
-    public boolean isPrime() {
-        Set primeSet = new HashSet(){ {add(1); add(number);} };
-        return number > 1 && factors().equals(primeSet);
-    }
-
-
-	public static void main(String[] args) {	
-        PrimeAlpha prime1 = new PrimeAlpha(10);
-        PrimeAlpha prime2 = new PrimeAlpha(7);
-
-        System.out.println(prime1.isPrime());
-        System.out.println(prime2.isPrime());
-	}
-}cd
+}
