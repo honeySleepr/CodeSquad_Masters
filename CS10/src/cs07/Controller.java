@@ -1,22 +1,35 @@
 package cs07;
 
 public class Controller {
-    private final Scheduller scheduller;
+    private final Scheduler scheduler;
     private final Memory memory;
-    private final Print print;
+    private final Printer printer;
 
-    public Controller(Scheduller scheduller, Memory memory, Print print) {
-        this.scheduller = scheduller;
+    public Controller(Scheduler scheduler, Memory memory, Printer printer) {
+        this.scheduler = scheduler;
         this.memory = memory;
-        this.print = print;
+        this.printer = printer;
     }
 
     public void start() {
         memory.loadMemory();
-        print.printConsole(scheduller.readyQueue);
+        printer.printInitStatus(scheduler.readyQueue);
+        processLoop();
+    }
 
-        while(! scheduller.runningQueue.isEmpty()) {
-            scheduller.startSchedule();
+    public void processLoop() {
+        int count = scheduler.readyQueue.size();
+        while (scheduler.terminatedQueue.size() < count) {
+            System.out.println("----------------------------");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+
+            }
+            scheduler.runScheduler();
+            printer.printRunningStatus(scheduler.process);
         }
+        System.out.println("모든 프로세스 종료");
     }
 }

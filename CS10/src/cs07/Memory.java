@@ -5,17 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Memory {
-    private final Scheduller scheduller;
+    private final Scheduler scheduler;
 
     private final List<myProcess> newMyProcesses = new ArrayList<>();
 
-    public Memory(Scheduller scheduller) {
-        this.scheduller = scheduller;
+    public Memory(Scheduler scheduler) {
+        this.scheduler = scheduler;
     }
 
     public void loadMemory() {
         createProcess();
-        scheduller.loadProcess(newMyProcesses);
+        scheduler.loadProcess(newMyProcesses);
     }
 
     protected void createProcess() {
