@@ -13,20 +13,13 @@ public class Controller {
 
     public void start() {
         memory.loadMemory();
-        printer.printInitStatus(scheduler.readyQueue);
+        printer.printReadyQueue(scheduler.readyQueue);
         processLoop();
     }
 
     public void processLoop() {
         int count = scheduler.readyQueue.size();
         while (scheduler.terminatedQueue.size() < count) {
-            System.out.println("----------------------------");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-
-            }
             scheduler.runScheduler();
             printer.printRunningStatus(scheduler.process);
         }
