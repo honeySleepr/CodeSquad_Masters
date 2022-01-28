@@ -6,7 +6,7 @@ public enum Status {
     RUN("running"),
     END("terminated");
 
-    private String message;
+    private final String message;
 
     Status(String message){
         this.message = message;
