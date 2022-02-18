@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Input {
-    private final String PROMPT_NAMES = "참여자들의 이름을 쉼표(,)로 구분하여 입력해주세요\n> ";
+    private final String PROMPT_NAMES = "참가자들의 이름을 쉼표(,)로 구분하여 입력해주세요\n> ";
     private final String PROMPT_LADDERHEIGHT = "최대 사다리 높이는 몇 개인가요?\n> ";
     private final String PROMPT_NOTNUMBER = "숫자를 입력해주세요\n> ";
-    private final String PROMPT_PRIZE = "이름은 5글자 이내로 입력해주세요\n> ";
+    private final String PROMPT_PRIZE = "상품을 쉼표(,)로 구분하여 입력해주세요\n> ";
 
     private List<String> names;
     private int ladderHeight;
@@ -36,6 +36,16 @@ public class Input {
         prize = new ArrayList<>();
         for (String st : processToList(br.readLine())) {
             prize.add(st);
+        }
+        matchSizeWithNames();
+    }
+
+    private void matchSizeWithNames() {
+        while(prize.size() > names.size()){
+           prize.remove(prize.size()-1);
+        }
+        while(prize.size() < names.size()){
+            prize.add("꽝");
         }
     }
 
@@ -84,7 +94,7 @@ public class Input {
         return ladderHeight;
     }
 
-    public List<String> getPrize() {
+    public List<String> getPrizeList() {
         return prize;
     }
 }

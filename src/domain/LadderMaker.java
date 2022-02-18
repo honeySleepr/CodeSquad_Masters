@@ -25,4 +25,6 @@ public class LadderMaker {
     protected List<Line> getLadderList() {
         return ladder;
     }
+
+
 }
