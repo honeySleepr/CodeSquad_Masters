@@ -3,7 +3,7 @@ package domain;
 import view.Input;
 import view.Output;
 
-public class Controller{
+public class Controller {
     private final Input input;
     private final Output output;
 
@@ -14,14 +14,14 @@ public class Controller{
 
     public void runApp() {
         input.processInput();
-        LadderMaker ladderMaker = new LadderMaker(input.getNameList().size(), input.getHeight());
+        LadderMaker ladderMaker = new LadderMaker(input.getNameList(), input.getPrizeList(),
+            input.getHeight());
         ladderMaker.make();
+        ladderMaker.calculate();
 
-        output.printNameAndPrize(input.getNameList(), 6);
+        output.printGameComponents(input.getNameList(), 6);
         output.printLadder(ladderMaker.getLadderList());
-        output.printNameAndPrize(input.getPrizeList(), 6);
-
-
+        output.printGameComponents(input.getPrizeList(), 6);
 
     }
 

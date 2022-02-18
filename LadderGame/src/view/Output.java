@@ -2,6 +2,7 @@ package view;
 
 import java.util.List;
 
+import domain.GameComponents;
 import domain.Line;
 
 public class Output {
@@ -10,9 +11,9 @@ public class Output {
     private static float start;
     private static float end;
 
-    public void printNameAndPrize(List<String> names, int length) {
-        for (int i = 0; i < names.size(); i++) {
-            System.out.print(addPadding(names.get(i),length));
+    public <C extends GameComponents> void printGameComponents(List<C> components, int length) {
+        for (int i = 0; i < components.size(); i++) {
+            System.out.print(addPadding(components.get(i).getName(),length));
         }
         System.out.println();
     }
