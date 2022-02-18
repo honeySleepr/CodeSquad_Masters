@@ -8,20 +8,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Input{
+public class Input {
     private final String PROMPT_NAMES = "참여자들의 이름을 쉼표(,)로 구분하여 입력해주세요\n> ";
     private final String PROMPT_LADDERHEIGHT = "최대 사다리 높이는 몇 개인가요?\n> ";
     private final String PROMPT_NOTNUMBER = "숫자를 입력해주세요\n> ";
-    private final String PROMPT_LENGTHERROR = "이름은 5글자 이내로 입력해주세요\n> ";
+    private final String PROMPT_PRIZE = "이름은 5글자 이내로 입력해주세요\n> ";
 
     private List<String> names;
     private int ladderHeight;
+    private List<String> prize;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public void processInput() {
         try {
-            names = receiveNameInput();
-            ladderHeight = Integer.parseInt(receiveHeightInput());
+            inputName();
+            inputPrize();
+            inputHeight();
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -29,28 +31,34 @@ public class Input{
         System.out.println();
     }
 
-    private List<String> receiveNameInput() throws IOException {
-
-        System.out.print(PROMPT_NAMES);
-        List<String> tempList = new ArrayList<>();
-        for(String name : processToList(br.readLine())){
-            tempList.add(cutToFiveLetters(name));
+    private void inputPrize() throws IOException {
+        System.out.print(PROMPT_PRIZE);
+        prize = new ArrayList<>();
+        for (String st : processToList(br.readLine())) {
+            prize.add(st);
         }
-        return tempList;
     }
 
-    private String receiveHeightInput() throws IOException {
+    private void inputName() throws IOException {
+        System.out.print(PROMPT_NAMES);
+        names = new ArrayList<>();
+        for (String st : processToList(br.readLine())) {
+            names.add(trimToFiveLetters(st));
+        }
+    }
+
+    private void inputHeight() throws IOException {
         System.out.print(PROMPT_LADDERHEIGHT);
         String input;
         while (!isValid((input = br.readLine()))) {
             System.out.print(PROMPT_NOTNUMBER);
         }
-        return input;
+        ladderHeight = Integer.parseInt(input);
     }
 
-    private String cutToFiveLetters(String name) {
-        if(name.length()>5){
-            return name.substring(0,5);
+    private String trimToFiveLetters(String name) {
+        if (name.length() > 5) {
+            return name.substring(0, 5);
         }
         return name;
     }
@@ -74,5 +82,9 @@ public class Input{
 
     public int getHeight() {
         return ladderHeight;
+    }
+
+    public List<String> getPrize() {
+        return prize;
     }
 }
