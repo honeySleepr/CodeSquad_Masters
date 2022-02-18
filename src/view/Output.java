@@ -10,7 +10,7 @@ public class Output {
     private static float start;
     private static float end;
 
-    public void printNames(List<String> names, int length) {
+    public void printNameAndPrize(List<String> names, int length) {
         for (int i = 0; i < names.size(); i++) {
             System.out.print(addPadding(names.get(i),length));
         }
