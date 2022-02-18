@@ -3,6 +3,7 @@ package view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,9 +32,9 @@ public class Input{
     private List<String> receiveNameInput() throws IOException {
 
         System.out.print(PROMPT_NAMES);
-        List<String> tempList;
-        while (!isValid(tempList = processToList(br.readLine()))) { //pobi,honux,crong,jk
-            System.out.print(PROMPT_LENGTHERROR);
+        List<String> tempList = new ArrayList<>();
+        for(String name : processToList(br.readLine())){
+            tempList.add(cutToFiveLetters(name));
         }
         return tempList;
     }
@@ -47,9 +48,11 @@ public class Input{
         return input;
     }
 
-    private boolean isValid(List<String> names) {
-        return names.stream()
-            .allMatch(str -> str.length() <= 5);
+    private String cutToFiveLetters(String name) {
+        if(name.length()>5){
+            return name.substring(0,5);
+        }
+        return name;
     }
 
     private boolean isValid(String input) {

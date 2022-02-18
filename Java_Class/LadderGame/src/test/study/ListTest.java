@@ -1,10 +1,9 @@
 package study;
 
 import static org.assertj.core.api.Assertions.*;
-
+import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 
-import org.junit.Test;
 
 public class ListTest {
     @Test
