@@ -1,10 +1,8 @@
 package study;
 
 import static org.assertj.core.api.Assertions.*;
-
+import org.junit.jupiter.api.*;
 import java.util.LinkedList;
-
-import org.junit.Test;
 
 public class LinkedListTest {
     @Test
